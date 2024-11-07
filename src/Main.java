@@ -11,7 +11,7 @@ public class Main extends JPanel implements ActionListener {
     public static final int width = 16;
     public static final int height = 16;
 
-    Timer timer = new Timer(300,this);
+    Timer timer = new Timer(500,this);
 
     apple App = new apple(Math.abs((int)(Math.random()*width-1)),Math.abs((int)(Math.random()*height-1)));
     Snake_1 s = new Snake_1(5,5,6,5);
@@ -48,10 +48,17 @@ public class Main extends JPanel implements ActionListener {
         for (int i =0; i < s.lenght; i++) {
 
             g.setColor(Color.blue);
-            if (s.arrX[i] != 0 && s.arrY[i]!= 0) {
+            //if (s.arrX[i] != 0 && s.arrY[i]!= 0) {
                 g.fillRect(s.arrX[i]*scale,s.arrY[i]*scale,scale,scale);
-            }
+            //}
 
+        }
+
+        if(s.gameOver){
+            //s.stop();
+            g.setColor(Color.red);
+            g.setFont(new Font("arial",Font.BOLD,24));
+            g.drawString("GAME OVER",8*scale,8*scale);
         }
     }
 
@@ -76,7 +83,18 @@ public class Main extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        s.move();
+
+        if(!s.gameOver){
+            s.move();
+        }
+
+        if((s.arrX[0]==App.posX) && (s.arrY[0]==App.posY)){
+            s.lenght++;
+            App.SetRandom();
+
+        }
+
+
         repaint();
     }
 
@@ -89,15 +107,15 @@ public class Main extends JPanel implements ActionListener {
             }
 
             if(key == KeyEvent.VK_DOWN){
-                s.direction = 2;
+                s.direction = 1;
             }
 
             if(key == KeyEvent.VK_LEFT){
-                s.direction = 3;
+                s.direction = 2;
             }
 
             if(key == KeyEvent.VK_RIGHT){
-                s.direction = 1;
+                s.direction = 3;
             }
         }
     }
