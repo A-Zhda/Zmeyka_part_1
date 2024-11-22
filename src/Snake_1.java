@@ -1,6 +1,6 @@
 
 public class Snake_1 {
-    public int lenght = 10;
+    public int lenght = 3;
     public int direction = 0;
 
     public int arrX[] = new int[50];
@@ -26,15 +26,13 @@ public class Snake_1 {
         //змея сама себя ест поэтому с 3 элемента
         for (int i = 3; i < lenght; i++) {
             for (int j = 3; j < lenght; j++) {
-                if(arrX[i]==arrY[j]){
                     if (arrX[i]== 0) {
                         continue;
                     }
-                    if(arrX[0] == arrX[i] && arrY[0] == arrY[j]){
+                    if(arrX[0] == arrX[i-1] && arrY[0] == arrY[j-1]){
                         gameOver = true;
-
+                        break;
                     }
-                }
             }
 
         }
@@ -57,21 +55,27 @@ public class Snake_1 {
         }
 
         //за границу рамки
-        if(arrX[0]>Main.width-1){
+        if(arrX[0]> SnakeGame.width-1){
             arrX[0]=0;
         }
         if(arrX[0]<0){
-            arrX[0]=Main.width-1;
+            arrX[0]= SnakeGame.width-1;
         }
 
-        if(arrY[0]>Main.height-1){
+        if(arrY[0]> SnakeGame.height-1){
             arrY[0]=0;
         }
         if(arrY[0]<0){
-            arrY[0]=Main.height-1;
+            arrY[0]= SnakeGame.height-1;
         }
     }
 
+    public void stop(){
+        for (int i = lenght; i > 0; i--) {
+            arrX[i] = arrX[i];
+            arrY[i] = arrY[i];
 
+        }
+    }
 
 }

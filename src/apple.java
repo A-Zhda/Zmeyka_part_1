@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class apple {
     public int posX;
     public int posY;
@@ -10,9 +8,9 @@ public class apple {
     }
 
     public void SetRandom(){
-        int Random = new Random().nextInt(0,1000);
-        posX = Random * Main.width - 1;
-        posY = Random * Main.height - 1;
+        //int Random = new Random().nextInt(0,1000); - так не работает
+        posX = Math.abs((int)(Math.random()* SnakeGame.width-1));
+        posY = Math.abs((int)(Math.random()* SnakeGame.height-1));
 
 
     }
